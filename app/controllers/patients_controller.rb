@@ -1,13 +1,36 @@
 class PatientsController < ApplicationController
 
   def index
-    patients = Patient.all
-    render json: {patients: patients}
+    @patients = Patient.all
+    render json: {patients: @patients}
+  end
+
+  def create
+    @patient = Patient.create(name: params[:name], age: params[:age].to_i, address: params[:address], phone_number: params[:phone_number])
+
+    render json: {patient: @patient}
   end
 
   def show
-    patient = Patient.find(params[:id])
-    render json: {patient: patient}
+    @patient = Patient.find(params[:id])
+    render json: {patient: @patient}
   end
+
+  def update
+    @patient = Patient.find(params[:id])
+    @patient.update(name: params[:name], age: params[:age].to_i, address: params[:address], phone_number: params[:phone_number])
+
+    render json: {patient: @patient}
+  end
+
+  def destroy
+    @patient = Patient.find(params[:id])
+
+    @patient.destroy
+
+    render json: {}, status: 200
+  end
+
+
 
 end
