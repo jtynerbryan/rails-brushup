@@ -26,7 +26,7 @@ class AppointmentsController < ApplicationController
   def destroy
     @appointment = Appointment.find(params[:id])
 
-    @appo.destroy
+    @appointment.destroy
 
     render json: {}, status: 200
   end

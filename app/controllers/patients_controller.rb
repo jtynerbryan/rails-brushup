@@ -6,9 +6,19 @@ class PatientsController < ApplicationController
   end
 
   def create
-    @patient = Patient.create(name: params[:name], age: params[:age].to_i, address: params[:address], phone_number: params[:phone_number])
+    @patient = Patient.new(
+      name: params[:name],
+      age: params[:age].to_i,
+      address: params[:address],
+      phone_number:
+      params[:phone_number]
+    )
 
-    render json: {patient: @patient}
+    if @patient.save
+      render json: {patient: @patient}
+    else
+      render json: {message: "invalid request"}, status: 400
+    end
   end
 
   def show

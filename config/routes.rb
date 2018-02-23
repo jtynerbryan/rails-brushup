@@ -5,4 +5,6 @@ Rails.application.routes.draw do
 
   get '/patient_appointments/:id', to: 'patients#appointments'
 
+  get '/physician_appointments/:id', to: 'physicians#appointments'
+
 end
