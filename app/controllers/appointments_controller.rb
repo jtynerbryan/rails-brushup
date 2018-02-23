@@ -2,25 +2,35 @@ class AppointmentsController < ApplicationController
 
   def index
     @appointment = Appointment.all
-    render json: {appointments: @appointment}
+    render json: { appointments: @appointment }
   end
 
   def create
-    @appointment = Appointment.create(title: params[:title], date: Date.parse(params[:date]), location: params[:location], patient_id: params[:patient_id].to_i, physician_id: params[:physician_id].to_i)
+    @appointment = Appointment.new(
+      title: params[:title],
+      date: Date.parse(params[:date]),
+      location: params[:location],
+      patient_id: params[:patient_id].to_i,
+      physician_id: params[:physician_id].to_i
+    )
 
-    render json: {appointment: @appointment}
+    if @appointment.save
+      render json: { appointment: @appointment }
+    else
+      render json: { message: "invalid request" }, status: 400
+    end
   end
 
   def show
     @appointment = Appointment.find(params[:id])
-    render json: {appointment: @appointment}
+    render json: { appointment: @appointment }
   end
 
   def update
     @appointment = Appointment.find(params[:id])
     @appointment.update(name: params[:name], age: params[:age].to_i, address: params[:address], phone_number: params[:phone_number])
 
-    render json: {appointment: @appointment}
+    render json: { appointment: @appointment }
   end
 
   def destroy

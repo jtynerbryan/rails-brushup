@@ -28,7 +28,12 @@ class PatientsController < ApplicationController
 
   def update
     @patient = Patient.find(params[:id])
-    @patient.update(name: params[:name], age: params[:age].to_i, address: params[:address], phone_number: params[:phone_number])
+    @patient.update(
+      name: params[:name],
+      age: params[:age].to_i,
+      address: params[:address],
+      phone_number: params[:phone_number]
+    )
 
     render json: {patient: @patient}
   end
