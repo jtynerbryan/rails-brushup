@@ -31,6 +31,12 @@ class PatientsController < ApplicationController
     render json: {}, status: 200
   end
 
+  def appointments
+    @patient = Patient.find(params[:id])
 
+    @appointments = @patient.appointments
+
+    render json: {appointments: @appointments}
+  end
 
 end

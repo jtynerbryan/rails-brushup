@@ -3,4 +3,6 @@ Rails.application.routes.draw do
 
   resources :patients, :physicians, :appointments
 
+  get '/patient_appointments/:id', to: 'patients#appointments'
+
 end
